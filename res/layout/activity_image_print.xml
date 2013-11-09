@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ImagePrintActivity" >
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/kitkat"
+        android:scaleType="fitCenter"
+        />
+	<Button
+	    android:id="@+id/print_button"
+	    android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Print"
+	    />
+</LinearLayout>
