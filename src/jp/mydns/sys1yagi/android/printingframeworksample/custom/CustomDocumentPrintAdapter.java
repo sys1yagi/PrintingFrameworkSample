@@ -1,5 +1,17 @@
-/**
- * 
+/*
+ * Copyright (C) 2013 Toshihiro Yagi. http://visible-true.blogspot.jp/
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package jp.mydns.sys1yagi.android.printingframeworksample.custom;
 
@@ -89,7 +101,7 @@ public class CustomDocumentPrintAdapter extends PrintDocumentAdapter {
             onDraw(page.getCanvas());
             mPdfDocument.finishPage(page);
         }
-        
+
         try {
             mPdfDocument.writeTo(new FileOutputStream(destination
                     .getFileDescriptor()));
@@ -175,8 +187,8 @@ public class CustomDocumentPrintAdapter extends PrintDocumentAdapter {
             if (i + 1 >= text.length()) {
                 // render
                 if (index != i) {
-                    canvas.drawText(text.substring(index, i + 1), paddingX, startY
-                            + textHeight, paint);
+                    canvas.drawText(text.substring(index, i + 1), paddingX,
+                            startY + textHeight, paint);
                     startY += textHeight + lineSpace;
                 }
             }
