@@ -30,6 +30,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintDocumentInfo;
 import android.print.pdf.PrintedPdfDocument;
+import android.util.Log;
 
 /**
  * @author yagitoshihiro
@@ -43,7 +44,6 @@ public class CustomDocumentPrintAdapter extends PrintDocumentAdapter {
     private String mTitle;
     private String mMessage;
 
-    // render resources
     PrintedPdfDocument mPdfDocument;
 
     public CustomDocumentPrintAdapter(Context context, Bitmap bitmap,
@@ -77,30 +77,34 @@ public class CustomDocumentPrintAdapter extends PrintDocumentAdapter {
             return;
         }
         int pages = 1;
+        // newAttributes.getColorMode();
+        // newAttributes.getMediaSize().getHeightMils();
+        // newAttributes.getMediaSize().getWidthMils();
+
         PrintDocumentInfo info = new PrintDocumentInfo.Builder("androids.pdf")
                 .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
                 .setPageCount(pages).build();
         callback.onLayoutFinished(info, true);
     }
 
+    @Override
     public void onWrite(android.print.PageRange[] pages,
             android.os.ParcelFileDescriptor destination,
             CancellationSignal cancellationSignal, WriteResultCallback callback) {
         if (mPdfDocument == null) {
+            Log.e("print", "error mPdfDocument is null.");
             return;
         }
-        for (int i = 0; i < pages.length; i++) {
 
-            PdfDocument.Page page = mPdfDocument.startPage(i);
-            if (cancellationSignal.isCanceled()) {
-                callback.onWriteCancelled();
-                mPdfDocument.close();
-                mPdfDocument = null;
-                return;
-            }
-            onDraw(page.getCanvas());
-            mPdfDocument.finishPage(page);
+        PdfDocument.Page page = mPdfDocument.startPage(0);
+        if (cancellationSignal.isCanceled()) {
+            callback.onWriteCancelled();
+            mPdfDocument.close();
+            mPdfDocument = null;
+            return;
         }
+        onDraw(page.getCanvas());
+        mPdfDocument.finishPage(page);
 
         try {
             mPdfDocument.writeTo(new FileOutputStream(destination

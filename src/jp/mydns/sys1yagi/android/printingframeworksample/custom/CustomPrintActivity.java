@@ -51,11 +51,13 @@ public class CustomPrintActivity extends Activity {
 
     private void printWithAdapter(String jobName, PrintDocumentAdapter adapter) {
         if (PrintHelper.systemSupportsPrint()) {
-            PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+            PrintManager printManager = 
+              (PrintManager) getSystemService(Context.PRINT_SERVICE);
             printManager.print(jobName, adapter, null);
         } else {
-            Toast.makeText(this, "この端末では印刷をサポートしていません", Toast.LENGTH_SHORT)
-                    .show();
+            Toast.makeText(this,
+              "この端末では印刷をサポートしていません",
+              Toast.LENGTH_SHORT).show();
         }
     }
 }

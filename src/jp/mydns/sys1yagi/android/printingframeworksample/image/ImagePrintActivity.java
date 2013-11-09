@@ -54,6 +54,7 @@ public class ImagePrintActivity extends Activity {
     private void printImage(String fileName, Bitmap bitmap) {
         if (PrintHelper.systemSupportsPrint()) {
             PrintHelper printHelper = new PrintHelper(this);
+            printHelper.setColorMode(PrintHelper.COLOR_MODE_COLOR);
             printHelper.setScaleMode(PrintHelper.SCALE_MODE_FIT);
             printHelper.printBitmap(fileName, bitmap);
         } else {

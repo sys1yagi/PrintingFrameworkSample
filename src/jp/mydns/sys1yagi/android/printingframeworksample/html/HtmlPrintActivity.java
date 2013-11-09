@@ -63,7 +63,6 @@ public class HtmlPrintActivity extends Activity {
 
     private void printHtml(String fileName, WebView webView) {
         if (PrintHelper.systemSupportsPrint()) {
-            
             PrintDocumentAdapter adapter = webView.createPrintDocumentAdapter();
             PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
             printManager.print(fileName, adapter, null);
